@@ -63,8 +63,8 @@ def atualizar_nota():
 
 root = Tk()
 root.title("**** SUAS NOTAS *****")
-width = 600
-height = 600
+width = 900
+height = 400
 
 sc_width = root.winfo_screenwidth()
 sc_height = root.winfo_screenheight()
@@ -74,55 +74,55 @@ y = (sc_height/2) - (height/2)
 root.geometry("%dx%d+%d+%d" % (width, height, x, y))
 root.resizable(0, 0)
 #Cor da janela principal
-root.config(bg='#91a38f')
+root.config(bg='#addf98')
 
-l1 = Label(root, text="Título", bg='#91a38f', fg='#6006ff')
-l1.grid(row=0, column=0, padx=5, pady=5)  
-l2 = Label(root, text="Autor", bg='#91a38f', fg='#6006ff')
-l2.grid(row=0, column=1, padx=5, pady=5)  
-l3 = Label(root, text="Conteúdo", bg='#91a38f', fg='#6006ff')
-l3.grid(row=0, column=2, padx=5, pady=5)  
+l1 = Label(root, font=("Roboto", 16), text="Título", fg='#000000', bg='#addf98')
+l1.grid(row=0, column=0, columnspan=2)
+
+l2 = Label(root, font=("Roboto", 16),text="Autor", fg='#000000',bg='#addf98')
+l2.grid(row=1, column=0, columnspan=2) 
+
+
+l3 = Label(root, font=("Roboto", 16), text="Conteúdo", fg='#000000', bg='#addf98')
+l3.grid(row=2, column=1, columnspan=2)  
 
 # Entradas
 titulo = StringVar()
-e1 = Entry(root, textvariable=titulo)
-e1.grid(row=1, column=0, padx=5, pady=5)  
+e1 = Entry(root, textvariable=titulo, width=30)
+e1.grid(row=0, column=1, columnspan=2)  
 
 autor = StringVar()
-e2 = Entry(root, textvariable=autor)
-e2.grid(row=1, column=1, padx=5, pady=5)  
+e2 = Entry(root, textvariable=autor, width=30)
+e2.grid(row=1, column=1, columnspan=2)  
 
 conteudo = StringVar()
-e3 = Entry(root, textvariable=conteudo)
-e3.grid(row=1, column=2, padx=5, pady=5)  
+e3 = Entry(root, textvariable=conteudo, width=80)
+e3.grid(row=3, column=1, columnspan=2)  
 
 # Listbox
-list1 = Listbox(root, height=8, width=55)
-list1.grid(row=2, column=0, columnspan=3, pady=10)  
+list1 = Listbox(root, height=8, width=100)
+list1.grid(row=6, column=0, columnspan=4)  
 
-sb1 = Scrollbar(root)
-sb1.grid(row=2, column=3, rowspan=6) 
 
-list1.configure(yscrollcommand=sb1.set)
-sb1.configure(command=list1.yview)
 
 list1.bind('<<ListboxSelect>>', get_linha_selecionada)
 
 # Botões
-b1 = Button(root, text="Exibir todos", width=22, bg="snow", command=visualizar_nota)
-b1.grid(row=3, column=0, padx=5, pady=5)  
+b3 = Button(root, font=("Roboto", 8),text="Incluir", width=22, bg="#81be6f", command=adicionar_nota)
+b3.grid(row=1, column=3, padx=10, pady=5)  
 
-b3 = Button(root, text="Incluir", width=22, bg="royal blue1", command=adicionar_nota)
-b3.grid(row=3, column=1, padx=5, pady=5)  
+b1 = Button(root, font=("Roboto", 10),text="Exibir todos", width=22, bg="snow", command=visualizar_nota)
+b1.grid(row=5, column=0, padx=20, pady=5)  
 
-b4 = Button(root, text="Atualizar Selecionado", width=22, bg="snow", command=atualizar_nota)
-b4.grid(row=3, column=2, padx=5, pady=5)  
+b4 = Button(root, font=("Roboto", 10),text="Atualizar Selecionado", width=22, bg="snow", command=atualizar_nota)
+b4.grid(row=7, column=0, padx=20, pady=5)  
 
-b5 = Button(root, text="Deletar Selecionado", bg="firebrick4", width=22, command=apagar_nota)
-b5.grid(row=4, column=0, columnspan=3, padx=5, pady=5) 
+b5 = Button(root, font=("Roboto", 8),text="Deletar Selecionado", bg="firebrick4", width=22, command=apagar_nota)
+b5.grid(row=7, column=2, padx=20, pady=5) 
 
-b6 = Button(root, text="Fechar", width=22, bg="red", command=root.destroy)
-b6.grid(row=5, column=0, columnspan=3, padx=5, pady=5) 
+b6 = Button(root, font=("Roboto", 8),text="Fechar", width=22, bg="#a8a8a8", command=root.destroy)
+b6.grid(row=8, column=3, padx=5, pady=5) 
+
 
 
 root.mainloop()
