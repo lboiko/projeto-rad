@@ -3,11 +3,12 @@ import sqlite3
 def connect():
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor()
-    cursor.execute("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTO INCREMENT, titulo TEXT NOT NULL, autor TEXT NOT NULL, conteudo TEXT NOT NULL")        
+    cursor.execute("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo TEXT NOT NULL, autor TEXT NOT NULL, conteudo TEXT NOT NULL)")        
     conn.commit()
     conn.close()
 
 def check_table():
+    connect()
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor()
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='notes';")
@@ -32,8 +33,7 @@ def insert(titulo, autor, conteudo):
 def search(titulo="", autor="", conteudo=""):
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor
-    cursor.execute("SELECT * FROM notes WHERE titulo=? OR autor=? OR conteudo=?",
-                   (titulo,autor,conteudo))
+    cursor.execute("SELECT * FROM notes WHERE titulo=? OR autor=? OR conteudo=?",(titulo,autor,conteudo))
     rows = cursor.fetchall()
     conn.close()
     return rows
@@ -41,15 +41,15 @@ def search(titulo="", autor="", conteudo=""):
 def delete(id):
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor()
-    cursor.execute("DELETE FROM notes WHERE id=?", (id))
+    cursor.execute("DELETE FROM notes WHERE id=?", (id,))
     conn.commit()
     conn.close()
 
-def update(titulo, autor, conteudo):
+def update(id, titulo, autor, conteudo):
     conn = sqlite3.connect("notes.db")
     cursor = conn.cursor()
     cursor.execute("UPDATE notes SET titulo=?, autor=?, conteudo=? WHERE id=?",
-                   (titulo, autor, conteudo))
+                   (titulo, autor, conteudo, id))
     conn.commit()
     conn.close()
 
