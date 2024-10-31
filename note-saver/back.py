@@ -20,7 +20,6 @@ if check_table():
     print("A tabela 'notes' existe.")
 else:
     print("A tabela 'notes' não existe.")
-#Inserir nota
 
 def insert(titulo, autor, conteudo):
     conn = sqlite3.connect("notes.db")
@@ -60,3 +59,4 @@ def view():
     rows = cur.fetchall()
     conn.close()
     return rows
+
